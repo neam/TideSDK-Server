@@ -6,7 +6,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-	'name' => 'My Web Application',
+	'name' => 'TideSDK API - Custom Endpoint',
 	// preloading 'log' component
 	'preload' => array('log'),
 	// autoloading model and component classes
