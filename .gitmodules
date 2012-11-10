@@ -1,3 +1,6 @@
 [submodule "api-yii/yii"]
 	path = api-yii/yii
 	url = https://github.com/yiisoft/yii.git
+[submodule "api-yii/app/protected/extensions/wrest"]
+	path = api-yii/app/protected/extensions/wrest
+	url = https://github.com/weavora/wrest.git
