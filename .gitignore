@@ -1,2 +1,4 @@
 api-yii/app/assets
 api-yii/app/protected/runtime
+api-php/files
+api-yii/app/update-service/app-update/*/*

@@ -1,17 +1,16 @@
 <?PHP
 
-$_REQUEST['version'] = "";
-$_REQUEST['name'] = "app-update";
-
+/**
+ * Personal update service for your 
+ */
 //uncomment to double-check request variables
 //print_r($_REQUEST);
-//
 //write variables from TiDe
 $currentversion = $_REQUEST['version'];
 $name = $_REQUEST['name'];
 //$mid = $_REQUEST['mid'];
 //$limit = $_REQUEST['limit'];
-$guid = $_REQUEST['guid'];
+//$guid = $_REQUEST['guid'];
 //$os = $_REQUEST['os'];
 //$ostype = $_REQUEST['ostype'];
 //prevent handling obviously invalid requests
@@ -29,7 +28,15 @@ set_error_handler(function( $errno, $errstr, $errfile, $errline, array $errconte
     });
 
 //set path to software-directory
-$path = getcwd() . '/../../../files/' . $name . '/win-x86/'; // . $guid . '/';
+$path = getcwd() . '/' . $name . '/';
+$logpath = getcwd() . '/' . $name . '.log';
+
+function dlog($msg, $logpath)
+{
+	error_log($msg . "\n", 3, $logpath);
+}
+
+dlog("Request", $logpath);
 
 //check os-directory
 $newestversion = scandir($path, 1);
@@ -49,7 +56,7 @@ $release = array(
 	"version" => $newestversion[0],
 	"manifest" => $manifest,
 	"release_notes" => "app://CHANGELOG.txt",
-	"url" => 'http://' . $_SERVER['SERVER_NAME'] . '/ti/' . $path . '/' . $newestversion[0] . '/appupdate.zip',
+	"url" => 'http://' . $_SERVER['SERVER_NAME'] . '/update-service/' . $path . '/' . $newestversion[0] . '/appupdate.zip',
 );
 $response = array(
 	"success" => true,
@@ -58,8 +65,8 @@ $response = array(
 		$release
 	)
 );
-$response_json = json_encode($response);
+$update_json = json_encode($response);
 
 //write json
-header('Content-type: application/json');
-echo $response_json;
+echo $update_json;
+?> 
